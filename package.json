@@ -1,0 +1,26 @@
+{
+  "name": "ghana-regions-districts-api",
+  "version": "0.0.0",
+  "description": "an api to provide data on list of regions and their districts and communities in Ghana",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clement-okyere/ghana-regions-districts-api.git"
+  },
+  "keywords": [
+    "ghana",
+    "regions",
+    "districts",
+    "communities",
+    "api"
+  ],
+  "author": "Clement Okyere",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clement-okyere/ghana-regions-districts-api/issues"
+  },
+  "homepage": "https://github.com/clement-okyere/ghana-regions-districts-api#readme"
+}
