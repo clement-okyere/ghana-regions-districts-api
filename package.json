@@ -4,7 +4,8 @@
   "description": "an api to provide data on list of regions and their districts and communities in Ghana",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start-dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -24,13 +25,18 @@
   },
   "homepage": "https://github.com/clement-okyere/ghana-regions-districts-api#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "nodemon": "^2.0.4"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
   },
   "jest": {
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ]
+  },
+  "devDependencies": {
+    "jest": "^26.4.2",
+    "nodemon": "^2.0.4",
+    "supertest": "^5.0.0"
   }
 }
