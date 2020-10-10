@@ -1,7 +1,8 @@
 var mongoose = require("mongoose");
 const app = require("./src/loaders/server");
 bodyParser = require("body-parser");
-var regions = require("./src/routes/region");
+const regions = require("./src/routes/region");
+const districts = require("./src/routes/district");
 
 const port = 3000;
 
@@ -24,6 +25,7 @@ var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 app.use("/regions", regions);
+app.use("/districts", districts);
 
 app.get("/", (req, res) => {
   res.send("regions and districts!");

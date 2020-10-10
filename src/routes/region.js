@@ -1,10 +1,10 @@
-const { Region } = require("../models/Regions");
+const { Region } = require("../models/region");
 var mongoose = require("mongoose");
 var express = require("express");
 var router = express.Router();
 
 router.get("/", async (req, res) => {
-  const regions = await region.find();
+  const regions = await Region.find();
   res.send(regions);
 });
 
@@ -20,8 +20,16 @@ router.post("/", async (req, res) => {
       });
       regionsArray.push(region);
     }
-    const result = Region.insertMany(regionsArray);
-    res.status(200).send("regions inserted successfully", result);
+
+    const result = Region.insertMany(regionsArray)
+      .then((resp) => {
+        console.log("response", resp);
+        return res.status(200).send("regions inserted successfully");
+      })
+      .catch((err) => {
+        console.log("error", err);
+        return res.status(500).send("An error occurred");
+      });
   } catch (err) {
     res.status(500).send(err);
   }
