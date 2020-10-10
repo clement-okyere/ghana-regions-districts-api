@@ -5,7 +5,9 @@ var express = require("express");
 var router = express.Router();
 
 router.get("/", async (req, res) => {
-  const districts = await District.find();
+  const districts = await District.find()
+    .populate("region", "name -_id")
+    .select("name capital region");
   res.status(200).send(districts);
 });
 
