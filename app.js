@@ -1,4 +1,6 @@
-var mongoose = require("mongoose");
+require("dotenv").config();
+const mongoose = require("mongoose");
+const config = require("./src/config/config");
 const app = require("./src/loaders/server");
 bodyParser = require("body-parser");
 const regions = require("./src/routes/region");
@@ -11,7 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Set up default mongoose connection
-var mongoDB = "mongodb://127.0.0.1/region_api";
+var mongoDB = `mongodb://${config.get("db").host}/${config.get("db").database}`;
 
 mongoose
   .connect(mongoDB, { useNewUrlParser: true })
