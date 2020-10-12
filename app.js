@@ -6,7 +6,7 @@ bodyParser = require("body-parser");
 const regions = require("./src/routes/region");
 const districts = require("./src/routes/district");
 
-const port = 3000;
+const port = config.get("port");
 
 app.use(bodyParser.json());
 
