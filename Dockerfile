@@ -1,0 +1,25 @@
+FROM node:12.13.0-alpine
+
+WORKDIR /home/node/app
+
+ARG NODE_ENV
+ENV NODE_ENV="${NODE_ENV}"
+
+ARG MONGODB_HOST
+ENV MONGODB_HOST="${MONGODB_HOST}"
+
+ARG MONGODB_DATABASE
+ENV MONGODB_DATABASE="${MONGODB_DATABASE}"
+
+COPY package*.json ./
+
+RUN npm ci --only=production
+
+COPY . .
+
+EXPOSE 4004
+
+
+CMD [ "node", "app.js" ]
+
+

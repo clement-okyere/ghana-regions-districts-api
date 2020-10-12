@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+  web-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: ghana-regions-districts-api
+    depends_on:
+      - mongo_db
+    volumes:
+      - ./src:/home/node/app/src
+    expose:
+      - "3000"
+    ports:
+      - "3005:3000"
+    command: npm run start-dev
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      ENV_PORT: ${ENV_PORT}
+      MONGODB_HOST: mongo_db
+      MONGODB_DATABASE: ${MONGODB_DATABASE}
+  mongo_db:
+    image: mongo:latest
+    container_name: regions-district-mongo-db
+    restart: always
+    volumes:
+      - db-data:/data/db
+      - mongo-config:/data/configdb
+
+volumes:
+  db-data:
+  mongo-config:
