@@ -11,19 +11,12 @@ var config = convict({
     default: "development",
     env: "NODE_ENV",
   },
-  //   ip: {
-  //     doc: "The IP address to bind.",
-  //     format: "ipaddress",
-  //     default: "127.0.0.1",
-  //     env: "IP_ADDRESS",
-  //   },
-  //   port: {
-  //     doc: "The port to bind.",
-  //     format: "port",
-  //     default: 8080,
-  //     env: "PORT",
-  //     arg: "port",
-  //   },
+  port: {
+    doc: "The port that the application listens on",
+    format: Number,
+    default: 3000,
+    env: "NODE_PORT",
+  },
   db: {
     host: {
       doc: "Database host name/IP",
