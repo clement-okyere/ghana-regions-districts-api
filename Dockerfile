@@ -5,6 +5,9 @@ WORKDIR /home/node/app
 ARG NODE_ENV
 ENV NODE_ENV="${NODE_ENV}"
 
+ARG ENV_PORT
+ENV ENV_PORT="${ENV_PORT}"
+
 ARG MONGODB_HOST
 ENV MONGODB_HOST="${MONGODB_HOST}"
 
@@ -16,9 +19,6 @@ COPY package*.json ./
 RUN npm ci --only=production
 
 COPY . .
-
-EXPOSE 4004
-
 
 CMD [ "node", "app.js" ]
 

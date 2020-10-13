@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/clement-okyere/ghana-regions-districts-api#readme",
   "dependencies": {
+    "axios": "^0.20.0",
     "body-parser": "^1.19.0",
     "convict": "^6.0.0",
     "convict-format-with-validator": "^6.0.0",

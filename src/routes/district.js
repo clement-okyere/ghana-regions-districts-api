@@ -16,6 +16,9 @@ router.get("/", async (req, res) => {
 router.get("/:region/region", async (req, res) => {
   var regex = new RegExp(["^", req.params.region, "$"].join(""), "i");
   let region = await Region.find({ name: regex }).limit(1);
+
+  if (!region.length) return res.send(400).send("region not found");
+
   const districts = await District.find({ region: { $eq: region[0]._id } })
     //.populate("region", "name -_id")
     .populate({
