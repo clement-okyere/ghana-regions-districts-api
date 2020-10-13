@@ -11,7 +11,6 @@ router.get("/", async (req, res) => {
 //endpoint accepts an array of regions
 router.post("/", async (req, res) => {
   try {
-    console.log("posted regions", req.body);
     let regionsArray = [];
     for (i = 0; i < req.body.length; i++) {
       let region = new Region({
@@ -23,11 +22,9 @@ router.post("/", async (req, res) => {
 
     const result = Region.insertMany(regionsArray)
       .then((resp) => {
-        console.log("response", resp);
         return res.status(200).send("regions inserted successfully");
       })
       .catch((err) => {
-        console.log("error", err);
         return res.status(500).send("An error occurred");
       });
   } catch (err) {

@@ -4,9 +4,25 @@ var mongoose = require("mongoose");
 var express = require("express");
 var router = express.Router();
 
+//get all regions
 router.get("/", async (req, res) => {
   const districts = await District.find()
     .populate("region", "name -_id")
+    .select("name capital region");
+  res.status(200).send(districts);
+});
+
+//get district by region
+router.get("/:region/region", async (req, res) => {
+  var regex = new RegExp(["^", req.params.region, "$"].join(""), "i");
+  let region = await Region.find({ name: regex }).limit(1);
+  const districts = await District.find({ region: { $eq: region[0]._id } })
+    //.populate("region", "name -_id")
+    .populate({
+      path: "region",
+      match: { _id: { $eq: region[0]._id } },
+      select: "name -_id",
+    })
     .select("name capital region");
   res.status(200).send(districts);
 });
@@ -17,11 +33,9 @@ router.post("/", async (req, res) => {
     if (!req.body.length)
       return res.send(400).send("districts cannot be empty");
 
-    console.log("posted districts", req.body);
     let districtsArray = [];
     for (i = 0; i < req.body.length; i++) {
       let region = await Region.find({ name: req.body[i].region }).limit(1);
-      console.log("matched region", region);
 
       let district = new District({
         name: req.body[i].name,
@@ -32,14 +46,11 @@ router.post("/", async (req, res) => {
     }
     const result = District.insertMany(districtsArray)
       .then((resp) => {
-        console.log("response", resp);
         return res.status(200).send("districts inserted successfully");
       })
       .catch((err) => {
-        console.log("error", err);
         res.status(500).send("Ann error occurred");
       });
-    console.log("result", result);
   } catch (err) {
     res.status(500).send(err);
   }
