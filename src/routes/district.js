@@ -30,7 +30,7 @@ router.get("/:region/region", async (req, res) => {
   res.status(200).send(districts);
 });
 
-//endpoint accepts an array of regions
+//endpoint accepts an array of districts
 router.post("/", async (req, res) => {
   try {
     if (!req.body.length)
