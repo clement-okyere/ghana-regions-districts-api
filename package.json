@@ -31,8 +31,10 @@
     "convict-format-with-validator": "^6.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
     "mongoose": "^5.10.9",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "winston-mongodb": "^5.0.5"
   },
   "jest": {
     "testEnvironment": "node",

@@ -1,42 +1,17 @@
 require("dotenv").config();
-const mongoose = require("mongoose");
-const config = require("./src/config/config");
-const app = require("./src/loaders/server");
-bodyParser = require("body-parser");
-const regions = require("./src/routes/region");
-const districts = require("./src/routes/district");
+const express = require("express");
+const winston = require("winston");
+const app = express();
 
+const config = require("./src/config/config");
 const port = config.get("port");
 
-app.use(bodyParser.json());
+require("./src/startup/logging");
+require("./src/startup/route")(app);
+require("./src/startup/db")();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
-//Set up default mongoose connection
-var mongoDB = `mongodb://${config.get("db").host}/${config.get("db").database}`;
-
-mongoose
-  .connect(mongoDB, { useNewUrlParser: true })
-  .then(() => console.log("Connected to MongoDb"))
-  .catch((err) => console.error("Could not connect to mongodb", err));
-
-//Get the default connection
-var db = mongoose.connection;
-
-//Bind connection to error event (to get notification of connection errors)
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
-
-app.use("/regions", regions);
-app.use("/districts", districts);
-
-app.get("/", (req, res) => {
-  res.send("regions and districts!");
-});
-
-var server = app.listen(port, () => {
-  console.log(
+app.listen(port, () => {
+  winston.info(
     `application listening on port ${port} at http://localhost:${port}`
   );
 });
-
-module.exports = server;
