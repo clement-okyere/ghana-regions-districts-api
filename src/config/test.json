@@ -1,0 +1,7 @@
+{
+  "env": "test",
+  "db": {
+    "host": "localhost",
+    "name": "region_api_test"
+  }
+}
