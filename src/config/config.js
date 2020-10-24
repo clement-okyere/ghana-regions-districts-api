@@ -24,19 +24,32 @@ var config = convict({
       default: "",
       env: "MONGODB_HOST",
     },
-    database: {
+    name: {
       doc: "Database name",
       format: String,
       default: "",
       env: "MONGODB_DATABASE",
     },
+    username: {
+      doc: "mongodb username",
+      format: String,
+      default: "",
+      env: "MONGODB_USERNAME",
+    },
+    password: {
+      doc: "mongodb password",
+      format: String,
+      default: "",
+      env: "MONGODB_PASSWORD",
+    },
   },
 });
 
 const env = config.get("env");
-const configPath = `./config/${env}.json`;
+const configPath = `${env}.json`;
 
 if (fs.existsSync(configPath)) {
+  console.log("configuration found!!!");
   config.loadFile(configPath);
 }
 
