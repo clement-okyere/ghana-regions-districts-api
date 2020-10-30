@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
 
     const result = Region.insertMany(regionsArray)
       .then((resp) => {
-        return res.status(200).send("regions inserted successfully");
+        return res.status(200).send("region(s) inserted successfully");
       })
       .catch((err) => {
         return res.status(500).send("An error occurred");
