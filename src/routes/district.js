@@ -49,10 +49,10 @@ router.post("/", async (req, res) => {
     }
     const result = District.insertMany(districtsArray)
       .then((resp) => {
-        return res.status(200).send("districts inserted successfully");
+        return res.status(200).send("district(s) inserted successfully");
       })
       .catch((err) => {
-        res.status(500).send("Ann error occurred");
+        res.status(500).send("An error occurred");
       });
   } catch (err) {
     res.status(500).send(err);

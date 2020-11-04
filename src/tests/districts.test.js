@@ -64,38 +64,33 @@ describe('/districts', () => {
         
             await district.save();
             const res = await request(server).get('/districts/Ashanti/region');
-            console.log("response from region by district search", res.text);
                 expect(res.status).toBe(200);
                 expect(res.body.length).toBe(1);
                 expect(res.body.some(g => g.name === "Asokore Mampong")).toBeTruthy();
         })
-        })
 
-    // describe('GET /:region/region', () => {
-    //          Region.collection.insertMany([
-    //         {
-    //             name: "Ashanti",
-    //             capital: "Kumasi"
-    //         },
-    //         {
-    //             name: "Bono",
-    //             capital: "Techiman"
-    //         }
-    //          ]);
-        
-    //     it("should district by region", async () => {
-    //     let region = await Region.find({ name: "Ashanti" }).limit(1);
-    //         let district = new District({
-    //             name: "Asokore Mampong",
-    //             capital: "Asokore Mampong",
-    //             region: region._id,
-    //         });
-        
-    //         district.save()
-    //             const res = await request(server).get('districts/Ashanti/region');
-    //             expect(res.status).toBe(200);
-    //             expect(res.body.length).toBe(1);
-    //             expect(res.body.some(g => g.name === "Asokore Mampong")).toBeTruthy();
-    //     })
-    //     })
+        it("should add new district(s)", async () => {
+            Region.collection.insertMany([
+            {
+                name: "Ashanti",
+                capital: "Kumasi"
+            },
+            {
+                name: "Bono",
+                capital: "Techiman"
+            }
+            ]);
+            
+            const res = await request(server).post('/districts')
+                   .send([
+                    {
+                        name: "Asokore Mampong",
+                        capital: "Asokore Mampong",
+                        region: "Ashanti"
+                    }  
+                ]);
+            expect(res.status).toBe(200);
+            expect(res.text).toBe("district(s) inserted successfully");
+        })
+        })
      })
