@@ -1,8 +1,32 @@
 version: 2.1
-orbs:
-  node: circleci/node@3.0.0
-workflows:
-  node-tests:
-    jobs:
-      - node/test
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      #log in to docker hub public repository
+      - run: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+
+      # create docker network
+      - run: docker network create -d bridge regions-api-network
+
+      #build mongodb image for testing
+      - run: docker run --name regions-api-db -d mongo:tag --network regions-api-network
+      
+      #build the application image
+      - run: | 
+             docker build -t clefresh/ghana-regions_api \
+              --build-arg NODE_ENV=production \
+             --build-arg ENV_PORT=3000 \
+             --build-arg MONGODB_HOST=localhost \
+             --build-arg MONGODB_HOST=regions-api-db \
+             --build-arg MONGODB_USERNAME=test \
+             --build-arg MONGODB_PASSWORD=test .
+
+      # run project image
+      - run: docker run clefresh/ghana-regions_api --network regions-api-network npm run test
+       
+
+
+
 
