@@ -11,7 +11,7 @@ jobs:
       - run: docker network create -d bridge regions-api-network
 
       #build mongodb image for testing
-      - run: docker run --name regions-api-db -d mongo:tag --network regions-api-network
+      - run: docker run --name regions-api-db -d mongo:latest --network regions-api-network
       
       #build the application image
       - run: | 
