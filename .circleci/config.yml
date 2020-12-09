@@ -23,7 +23,7 @@ jobs:
              --build-arg MONGODB_PASSWORD=test .
 
       # run project image
-      - run: docker run clefresh/ghana-regions_api  npm run test
+      - run: docker run clefresh/ghana-regions_api  npm test -- --updateSnapshot
        
 
 
