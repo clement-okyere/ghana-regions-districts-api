@@ -52,7 +52,7 @@ router.post("/", async (req, res) => {
         return res.status(200).send("district(s) inserted successfully");
       })
       .catch((err) => {
-        res.status(500).send("An error occurred");
+        res.status(500).send(err);
       });
   } catch (err) {
     res.status(500).send(err);
