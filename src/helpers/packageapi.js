@@ -1,41 +1,41 @@
-require("dotenv").config();
-const axios = require("axios");
+require('dotenv').config();
+const axios = require('axios');
 
 class PackageApi {
   constructor() {
     this.baseUrl = process.env.BASE_URL;
   }
 
-  //get all regions
+  // get all regions
   async getRegions() {
     try {
-      let resp = await axios.get(`${this.baseUrl}/regions`);
-      let data = resp.data;
+      const resp = await axios.get(`${this.baseUrl}/regions`);
+      const { data } = resp;
       return data;
     } catch (err) {
-      return "An error occurred";
+      return 'An error occurred';
     }
   }
 
-  //get all districts
+  // get all districts
   async getDistricts() {
     try {
-      let resp = await axios.get(`${this.baseUrl}/districts`);
-      let data = resp.data;
+      const resp = await axios.get(`${this.baseUrl}/districts`);
+      const { data } = resp;
       return data;
     } catch (err) {
-      return "An error occurred";
+      return 'An error occurred';
     }
   }
 
-  //get district by region name
+  // get district by region name
   async getDistrictsByRegion(region) {
     try {
-      let resp = await axios.get(`${this.baseUrl}/districts/${region}/region`);
-      let data = resp.data;
+      const resp = await axios.get(`${this.baseUrl}/districts/${region}/region`);
+      const { data } = resp;
       return data;
     } catch (err) {
-      return "An error occurred";
+      return 'An error occurred';
     }
   }
 }
