@@ -24,6 +24,8 @@ services:
     image: mongo:latest
     container_name: regions-district-mongo-db
     restart: always
+    ports:
+      - 27018:27017
     volumes:
       - db-data:/data/db
       - mongo-config:/data/configdb
