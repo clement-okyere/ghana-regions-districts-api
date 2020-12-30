@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "jest --ci --verbose --coverage --forceExit --watchAll --maxWorkers=1",
+    "lint": "eslint ./src --fix",
     "start-dev": "nodemon app.js"
   },
   "repository": {
@@ -43,6 +44,9 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^7.16.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "jest": "^26.4.2",
     "nodemon": "^2.0.4",
     "supertest": "^5.0.0"
