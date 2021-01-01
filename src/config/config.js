@@ -29,19 +29,7 @@ const config = convict({
       format: String,
       default: '',
       env: 'MONGODB_DATABASE',
-    },
-    username: {
-      doc: 'mongodb username',
-      format: String,
-      default: '',
-      env: 'MONGODB_USERNAME',
-    },
-    password: {
-      doc: 'mongodb password',
-      format: String,
-      default: '',
-      env: 'MONGODB_PASSWORD',
-    },
+    }
   },
 });
 
