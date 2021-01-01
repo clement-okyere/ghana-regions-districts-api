@@ -27,6 +27,7 @@ services:
     ports:
       - 27018:27017
     volumes:
+      - ./dump:/var/dump
       - db-data:/data/db
       - mongo-config:/data/configdb
 
