@@ -1,0 +1,261 @@
+{
+"swagger": "2.0",
+"info": {
+"version": "1.0.0", 
+"title": "Ghana Regions and districts api",
+"description": "API to fetch regions and districts in Ghana",
+"license": {
+"name": "MIT",
+"url": "https://opensource.org/licenses/MIT"
+}
+},
+"host": "localhost:3005",
+"basePath": "/",
+"tags": [
+{
+"name": "Regions and districts API",
+"description": "API for Regions and districts in Ghana"
+}
+],
+"schemes": [
+"http"
+],
+"consumes": [
+"application/json"
+],
+"produces": [
+"application/json"
+],
+"paths": {
+"/regions": {
+"get": {
+"tags": [
+"Regions"
+],
+"summary": "Get list of regions",
+"responses": {
+"200": {
+"description": "OK",
+"schema": {
+"$ref": "#/definitions/Regions"
+}
+}
+}
+},
+"post": {
+"tags": [
+"Regions"
+],
+"description": "Create new region",
+"parameters": [
+{
+"name": "region",
+"in": "body",
+"description": "Name of region you want to create",
+"schema": {
+"$ref": "#/definitions/AddRegion"
+}
+},
+{
+"name": "capital",
+"in": "body",
+"description": "Regional capital",
+"schema": {
+"$ref": "#/definitions/AddRegion"
+}
+}
+],
+"produces": [
+"application/json"
+],
+"responses": {
+"200": {
+"description": "Region created successfully"
+}
+}
+}
+},
+"/districts/{region}/region": {
+"get": {
+"tags": [
+"Find District By region"
+],
+"summary": "Find districts by region",
+"parameters": [{
+    "name": "region",
+    "in": "path",
+    "schema": {
+    "type": "integer"
+    },
+    "required": "true",
+    "description": "region name"
+}],
+"responses": {
+"200": {
+"description": "OK",
+"schema": {
+"$ref": "#/definitions/Districts"
+}
+},
+"404": {
+"description": "Book not found"
+}
+}
+}
+},
+"/districts": {
+"get": {
+"tags": [
+"Get Districts"
+],
+"summary": "Get list of districts",
+"responses": {
+"200": {
+"description": "OK",
+"schema": {
+"$ref": "#/definitions/District"
+}
+}
+}
+},
+"post": {
+"tags": [
+"Add Districts"
+],
+"description": "Create new district",
+"parameters": [
+{
+"name": "name",
+"in": "body",
+"description": "Name of district you want to create",
+"schema": {
+"$ref": "#/definitions/AddDistrict"
+}
+},
+{
+"capital": "capital",
+"in": "body",
+"description": "District capital",
+"schema": {
+"$ref": "#/definitions/AddDistict"
+}
+},
+{
+"region": "region",
+"in": "body",
+"description": "Region district is found in",
+"schema": {
+"$ref": "#/definitions/AddDistict"
+}
+}
+],
+"produces": [
+"application/json"
+],
+"responses": {
+"200": {
+"description": "District created successfully"
+}
+}
+}
+}
+},
+"definitions": {
+"Region": {
+"required": [
+"_id",
+"name",
+"capital",
+"created_at"
+],
+"properties": {
+"_id": {
+"type": "string",
+"uniqueItems": true
+},
+"name": {
+"type": "string",
+"uniqueItems": true
+},
+"capital": {
+"type": "string",
+"uniqueItems": true
+},
+"created_at": {
+"type": "string",
+"format": "date"
+}
+}
+},
+"AddRegion": {
+"required": [
+"name",
+"capital"
+],
+"properties": {
+"name": {
+"type": "string",
+"uniqueItems": true
+},
+"capital": {
+"type": "string",
+"uniqueItems": true
+}
+}
+},
+"District": {
+"required": [
+"_id",
+"name",
+"capital",
+"created_at"
+],
+"properties": {
+"_id": {
+"type": "string",
+"uniqueItems": true
+},
+"name": {
+"type": "string",
+"uniqueItems": true
+},
+"capital": {
+"type": "string",
+"uniqueItems": true
+},
+"created_at": {
+"type": "string",
+"format": "date"
+}
+}
+},
+"AddDistrict": {
+"required": [
+"name",
+"capital",
+"region"
+],
+"properties": {
+"name": {
+"type": "string",
+"uniqueItems": true
+},
+"capital": {
+"type": "string",
+"uniqueItems": true
+},
+"region": {
+"type": "string"
+}
+}
+}
+},
+"Regions": {
+"type": "array",
+"$ref": "#/definitions/Region"
+},
+"Districts": {
+"type": "array",
+"$ref": "#/definitions/District"
+}
+}
