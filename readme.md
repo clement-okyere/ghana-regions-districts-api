@@ -1,6 +1,6 @@
 #Description
 
-- A node js backend web api project that has the regions and ditricts in ghana with their capitals (data was scraped from wikipedia).
+- A node js backend web api project that has the regions and districts in ghana with their capitals (data was scraped from wikipedia).
 - Endpoints are going to be added for communities in the future
 
 #Requirements
